@@ -17,9 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".sample.ActFreeRippleSample">
+        <activity android:name=".sample.ripple.ActFreeRippleSample">
         </activity>
-        <activity android:name=".sample.ActRemoteConfig">
+        <activity android:name=".sample.remoteconfig.ActRemoteConfig">
+        </activity>
+        <activity android:name=".sample.stickys.ActStickySample">
         </activity>
     </application>
 

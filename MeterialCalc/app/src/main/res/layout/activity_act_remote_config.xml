@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="materialcalc.house.godbeom.com.materialcalc.sample.ActRemoteConfig"
+    tools:context="materialcalc.house.godbeom.com.materialcalc.sample.remoteconfig.ActRemoteConfig"
     android:orientation="vertical">
 
 

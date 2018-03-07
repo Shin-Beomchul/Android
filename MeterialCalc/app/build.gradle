@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -34,7 +35,10 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
 
 
-    compile 'com.google.firebase:firebase-config:11.6.2'//remoteConfig
+    implementation 'com.google.firebase:firebase-config:11.6.2'//remoteConfig
+    implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.6'// sticky
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
 }
 

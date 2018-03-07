@@ -1,4 +1,4 @@
-package materialcalc.house.godbeom.com.materialcalc.sample;
+package materialcalc.house.godbeom.com.materialcalc.sample.remoteconfig;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

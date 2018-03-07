@@ -1,4 +1,4 @@
-package materialcalc.house.godbeom.com.materialcalc.sample
+package materialcalc.house.godbeom.com.materialcalc.sample.ripple
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

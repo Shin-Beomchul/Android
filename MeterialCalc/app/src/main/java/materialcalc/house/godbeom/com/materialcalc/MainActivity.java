@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import materialcalc.house.godbeom.com.materialcalc.sample.ActRemoteConfig;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.ActStickySample;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
 //		startActivity(new Intent(MainActivity.this,ActFreeRippleSample.class));
 
-		startActivity(new Intent(MainActivity.this,ActRemoteConfig.class));
+//		startActivity(new Intent(MainActivity.this,ActRemoteConfig.class));
+
+		startActivity(new Intent(MainActivity.this,ActStickySample.class));
 
 
 	}
