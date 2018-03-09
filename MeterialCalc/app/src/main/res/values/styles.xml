@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlHighlight">#FF8800</item>
+        <item name="colorControlHighlight">#88FF8800</item>
         <!--colorControlHighlight: 위젯을 터치 하거나 액션이 일어날때 나타나는 색상 입니다-->
     </style>
 

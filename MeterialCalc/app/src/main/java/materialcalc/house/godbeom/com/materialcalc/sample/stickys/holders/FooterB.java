@@ -7,7 +7,7 @@ import materialcalc.house.godbeom.com.materialcalc.model.UISection;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyFooterHolder;
 
 /**
- * Created by Administrator on 2018-03-06.
+ * Created by BeomChul.Shin on 2018-03-06.
  */
 
 public class FooterB extends StickyFooterHolder {

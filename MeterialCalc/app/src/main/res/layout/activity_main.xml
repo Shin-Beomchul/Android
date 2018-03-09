@@ -3,7 +3,34 @@
               android:layout_height="match_parent"
               android:background="#EDEDED"
               android:orientation="vertical"
-              android:padding="16dp">
+              >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/btnSticky"
+            android:text="Section Wrapp Sticky"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/btnRipple"
+            android:text="Free OS Background with RIPPLE"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/btnConfig"
+            android:text="remote Config"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+    </LinearLayout>
 
 
 

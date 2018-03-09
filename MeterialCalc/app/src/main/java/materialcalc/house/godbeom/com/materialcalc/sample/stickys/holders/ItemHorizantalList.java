@@ -7,16 +7,11 @@ import materialcalc.house.godbeom.com.materialcalc.model.UISection;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyItemHolder;
 
 /**
- * Created by Administrator on 2018-03-07.
+ * Created by BeomChul.Shin on 2018-03-07.
  */
 
 public class ItemHorizantalList extends StickyItemHolder {
 
-
-	public ItemHorizantalList(View itemView,int viewRes) {
-		super();
-
-	}
 
 	public ItemHorizantalList(View itemView) {
 		super(itemView);

@@ -7,7 +7,7 @@ import materialcalc.house.godbeom.com.materialcalc.model.UISection;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyItemHolder;
 
 /**
- * Created by Administrator on 2018-03-07.
+ * Created by BeomChul.Shin on 2018-03-07.
  */
 
 public class ItemBannerA extends StickyItemHolder {
