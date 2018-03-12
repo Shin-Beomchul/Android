@@ -97,7 +97,7 @@ public class HIFAdapter extends SectioningAdapter{
 	 */
 	@Override
 	public int getSectionItemUserType(int sectionIndex, int itemIndex) {
-		return mSections.get(sectionIndex).getItems().get(itemIndex).getViewType();
+		return mSections.get(sectionIndex).getItems().get(itemIndex).getViewType(); 
 	}
 
 	/**

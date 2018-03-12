@@ -109,6 +109,29 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**Sample Data*/
 	public UISection sectionTypeA() {
 		UISection section = new UISection();
@@ -120,7 +143,6 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 		header.putViewType(HIFAdapter.HEADER_A);
 		//items
 		items = dummyItemGenerator("Item", HIFAdapter.ITEM_A, 10);
-
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_A);
 
