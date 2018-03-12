@@ -1,6 +1,5 @@
 package materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,22 +12,17 @@ import materialcalc.house.godbeom.com.materialcalc.model.UISection;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyItemHolder;
 
 /**
- * Created by Administrator on 2018-03-06.
+ * Created by BeomChul.Shin on 2018-03-06.
  */
 
 public class ItemA extends StickyItemHolder {
 
-	Context mContext;
 	@BindView(R.id.iv_itemA)
 	ImageView iv_itemA;
 	/*Code Type 2 -Holder View inflating */
 	public ItemA(int viewRes, ViewGroup parent, boolean attachToRoot) {
 		super(R.layout.item_a, parent, attachToRoot);
-//		super(context, viewRes, parent, attachToRoot); /**둘 다 허용.*/
-		mContext = parent.getContext();
 	}
-
-
 
 
 
@@ -37,7 +31,7 @@ public class ItemA extends StickyItemHolder {
 		iv_itemA.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(mContext ,"I'am A-Type imageView ",Toast.LENGTH_SHORT).show();
+				Toast.makeText(iv_itemA.getContext() ,"I'am A-Type imageView ",Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

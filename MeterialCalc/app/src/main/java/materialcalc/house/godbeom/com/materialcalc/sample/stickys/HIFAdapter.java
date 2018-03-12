@@ -116,11 +116,9 @@ public class HIFAdapter extends SectioningAdapter {
 				return new ItemB(inflateHolderView(R.layout.item_b, parent, false)); //Code Type 1 -Adapter
 
 			case ITEM_HORIZANTAL_LIST:
-				return new ItemHorizantalList(inflateHolderView(R.layout.item_list_content, parent, false));
+				return new ItemHorizantalList(R.layout.item_list_content, parent, false);
 			case BANNER_A:
 				return new ItemBannerA(inflateHolderView(R.layout.item_benner, parent, false));
-
-
 			default:
 				return new ItemB(inflateHolderView(R.layout.item_b, parent, false));
 		}

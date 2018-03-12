@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import materialcalc.house.godbeom.com.materialcalc.R;
 import materialcalc.house.godbeom.com.materialcalc.model.UIItem;
 import materialcalc.house.godbeom.com.materialcalc.model.UISection;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.dto.HozImgListDTO;
 import materialcalc.house.godbeom.com.materialcalc.sample.utill.DeviceUtil;
 
 /**
@@ -136,6 +137,10 @@ public class ActStickySample extends AppCompatActivity {
 		item1.putViewType(HIFAdapter.ITEM_A);
 		item1.putData("item1");
 
+
+		UIItem  itemHozList = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST,5);
+
+
 		UIItem  item2 = new UIItem();
 		item2.putViewType(HIFAdapter.ITEM_B);
 		item2.putData("item2");
@@ -144,6 +149,8 @@ public class ActStickySample extends AppCompatActivity {
 		item3.putViewType(HIFAdapter.ITEM_A);
 		item3.putData("item3");
 
+
+		UIItem  itemHozList2 = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST,5);
 		UIItem  item4 = new UIItem();
 		item4.putViewType(HIFAdapter.ITEM_B);
 		item4.putData("item4");
@@ -153,7 +160,7 @@ public class ActStickySample extends AppCompatActivity {
 		item5.putData("item5");
 
 		UIItem  item6 = new UIItem();
-		item6.putViewType(HIFAdapter.ITEM_A);
+		item6.putViewType(HIFAdapter.ITEM_B);
 		item6.putData("item6");
 
 		//footer
@@ -163,8 +170,10 @@ public class ActStickySample extends AppCompatActivity {
 		items.add(item1);
 		items.add(item2);
 		items.add(item3);
+		items.add(itemHozList);
 		items.add(item4);
 		items.add(item5);
+		items.add(itemHozList2);
 		items.add(item6);
 
 
@@ -187,16 +196,29 @@ public class ActStickySample extends AppCompatActivity {
 		return uiItems;
 	}
 
-	ArrayList<UIItem> dummyHorizontalListItemGenerator(String name, int viewType ,int cnt){
+	UIItem dummyHorizontalListItem(int viewType,int cnt){
 
-		ArrayList<UIItem> uiItems = new ArrayList<>();
+		UIItem  item = new UIItem();
+		ArrayList<	HozImgListDTO> hozItems = new ArrayList<>();
+		item.putViewType(viewType);
+
 		for(int i=0; i <cnt; i ++){
-			UIItem  item = new UIItem();
-			item.putViewType(viewType);
-			item.putData(name);
-			uiItems.add(item);
+			HozImgListDTO hozImgListDTO = new HozImgListDTO();
+			hozImgListDTO.setName("이미지 + "+ i);
+
+			if(i%2==0){
+				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2017/12/29/18/47/turkey-3048299_960_720.jpg");
+			}else if(i%3==0){
+				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2018/03/12/00/43/portrait-3218469_960_720.jpg");
+			}else{
+				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2015/03/12/04/43/landscape-669619_960_720.jpg");
+			}
+
+			hozItems.add(hozImgListDTO);
 		}
-		return uiItems;
+
+		item.putData(hozItems);
+		return item;
 	}
 
 }
