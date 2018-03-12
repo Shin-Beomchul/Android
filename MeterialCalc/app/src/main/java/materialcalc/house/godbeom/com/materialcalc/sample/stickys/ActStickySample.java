@@ -70,7 +70,6 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 		});
 		mRecyclerView.setLayoutManager(StickylayoutManager);
 		mRecyclerView.setAdapter(mHIFStickyAdapter);
-		mRecyclerView.setAnimation(new );
 	}
 
 	/**
