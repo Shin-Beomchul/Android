@@ -1,4 +1,4 @@
-package materialcalc.house.godbeom.com.materialcalc.sample.stickys;
+package materialcalc.house.godbeom.com.materialcalc.sample.stickys.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import materialcalc.house.godbeom.com.materialcalc.sample.stickys.dto.HozImgList
 
 /**
  * Created by BeomChul.Shin on 2017-12-21.
+ * 리스트 내의 가로 스크롤 뷰 어뎁터.
  */
 
 public class ItemHozListAdapter extends RecyclerView.Adapter<ItemHozListAdapter.ViewHolder>{
@@ -45,7 +47,8 @@ public class ItemHozListAdapter extends RecyclerView.Adapter<ItemHozListAdapter.
 
 			 Glide.with(holder.bmkThum.getContext())
 					.load(data.getImgPath())
-					.into(holder.bmkThum);
+					 .apply(new RequestOptions().centerCrop().placeholder(R.mipmap.ic_launcher_round))
+					 .into(holder.bmkThum);
 		}
 
 		@Override

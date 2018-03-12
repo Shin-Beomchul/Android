@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class UISection {
 
+    int sectionId;
     UIItem mHeader;
 	UIItem mFooter;
     ArrayList<UIItem> mItems;
@@ -46,6 +47,16 @@ public class UISection {
 
     public ArrayList<UIItem> getItems() {
         return mItems;
+    }
+
+
+    public void setSectionId(int sectionId) {
+        this.sectionId = sectionId;
+    }
+
+
+    public int getSectionId() {
+        return sectionId;
     }
 
     public void reset() {

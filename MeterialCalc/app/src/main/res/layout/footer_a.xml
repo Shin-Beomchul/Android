@@ -7,8 +7,8 @@
     android:layout_height="wrap_content">
 
 
-    <TextView
-        android:background="#aaeeaaee"
+    <Button
+        android:id="@+id/morebtn"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="40dp"

@@ -1,4 +1,4 @@
-package materialcalc.house.godbeom.com.materialcalc.sample.stickys;
+package materialcalc.house.godbeom.com.materialcalc.sample.stickys.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -28,7 +28,10 @@ import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.ItemHo
  * Created by BeomChul.Shin on 2018-03-06.
  */
 
-public class HIFAdapter extends SectioningAdapter {
+public class HIFAdapter extends SectioningAdapter{
+
+
+
 	public final static int BANNER_A = 0;
 	public final static int ITEM_A = 1;
 	public final static int ITEM_B = 2;
@@ -40,12 +43,13 @@ public class HIFAdapter extends SectioningAdapter {
 	public final static int HEADER_B = 6;
 
 	public final static int ITEM_HORIZANTAL_LIST = 7;
+	FooterA.MoreListener moreListener;
 
 
 	ArrayList<UISection> mSections;
 	Context mContext;
 
-	HIFAdapter(Context context, ArrayList<UISection> sections) {
+	public HIFAdapter(Context context, ArrayList<UISection> sections) {
 		mContext = context;
 		mSections = sections;
 
@@ -145,7 +149,7 @@ public class HIFAdapter extends SectioningAdapter {
 	public StickyFooterHolder onCreateFooterViewHolder(ViewGroup parent, int footerType) {
 		switch (footerType) {
 			case FOOTER_A:
-				return new FooterA(inflateHolderView(R.layout.footer_a, parent, false));
+				return new FooterA(inflateHolderView(R.layout.footer_a, parent, false),moreListener);
 			case FOOTER_B:
 				return new FooterB(inflateHolderView(R.layout.footer_b, parent, false));
 			default:
@@ -180,7 +184,10 @@ public class HIFAdapter extends SectioningAdapter {
 	private View inflateHolderView(int viewId, ViewGroup parent, boolean attachToRoot) {
 		LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 		return inflater.inflate(viewId, parent, attachToRoot);
-
 	}
 
+
+	public void setMoreListener(FooterA.MoreListener moreListener) {
+		this.moreListener = moreListener;
+	}
 }

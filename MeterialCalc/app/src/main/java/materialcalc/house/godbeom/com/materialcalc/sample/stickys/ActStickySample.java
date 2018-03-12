@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import org.zakariya.stickyheaders.StickyHeaderLayoutManager;
 
@@ -16,22 +17,24 @@ import butterknife.ButterKnife;
 import materialcalc.house.godbeom.com.materialcalc.R;
 import materialcalc.house.godbeom.com.materialcalc.model.UIItem;
 import materialcalc.house.godbeom.com.materialcalc.model.UISection;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.adapters.HIFAdapter;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.dto.HozImgListDTO;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.FooterA;
 import materialcalc.house.godbeom.com.materialcalc.sample.utill.DeviceUtil;
 
 /**
  * Created by BeomChul.Shin on 2018-03-06.
  *
+ * grid 대응 문제. : android sectioned grid recyclerview
+ * space 대응 문제.
  *
- * */
-public class ActStickySample extends AppCompatActivity {
+ */
+public class ActStickySample extends AppCompatActivity implements FooterA.MoreListener {
 
 	@BindView(R.id.stickyRecycler)
 	RecyclerView mRecyclerView;
-
-	HIFAdapter mStickyAdapter=null;
-
-	 ArrayList<UISection> mSections = new ArrayList<UISection>();
+	HIFAdapter mHIFStickyAdapter = null;
+	ArrayList<UISection> mSections = new ArrayList<UISection>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +46,18 @@ public class ActStickySample extends AppCompatActivity {
 	}
 
 
-	public void createStickyList(){
-		if(mStickyAdapter !=null)
+	/**
+	 * 생성
+	 */
+	public void createStickyList() {
+		if (mHIFStickyAdapter != null)
 			return;
 
+		mHIFStickyAdapter = new HIFAdapter(getApplicationContext(), mSections);
+		mHIFStickyAdapter.setMoreListener(this);
 
-		mStickyAdapter = new HIFAdapter(getApplicationContext(),mSections);
 
-
-	 StickyHeaderLayoutManager StickylayoutManager = new StickyHeaderLayoutManager();
+		StickyHeaderLayoutManager StickylayoutManager = new StickyHeaderLayoutManager();
 		StickylayoutManager.setHeaderPositionChangedCallback(new StickyHeaderLayoutManager.HeaderPositionChangedCallback() {
 			@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 			@Override
@@ -63,20 +69,49 @@ public class ActStickySample extends AppCompatActivity {
 			}
 		});
 		mRecyclerView.setLayoutManager(StickylayoutManager);
-		mRecyclerView.setAdapter(mStickyAdapter);
+		mRecyclerView.setAdapter(mHIFStickyAdapter);
+		mRecyclerView.setAnimation(new );
 	}
 
-	public void updateStickyList(){
-		mSections.add(GeneratorBannerSection(HIFAdapter.BANNER_A));
-		mSections.add(sectionFactoryTypeB());
-		mSections.add(sectionFactoryTypeA());
+	/**
+	 * 업데이트
+	 */
+	public void updateStickyList() {
+		mSections.add(sectionBanner(HIFAdapter.BANNER_A));
+		mSections.add(sectionTypeB());
+		mSections.add(sectionTypeA());
 		mSections.add(sectionMixType());
 
-		mStickyAdapter.notifyAllSectionsDataSetChanged();
+		mHIFStickyAdapter.notifyAllSectionsDataSetChanged();
+	}
+
+	/**
+	 * 추가
+	 */
+	public void addItem(UIItem addItem, int sectionIdx) {
+
+		if (mSections == null || mHIFStickyAdapter == null) {
+			return;    //err
+		}
+
+		ArrayList<UIItem> sectionInItems = mSections.get(sectionIdx).getItems();
+		sectionInItems.add(addItem);
+		mHIFStickyAdapter.notifySectionItemChanged(sectionIdx, sectionInItems.size() - 1);
 	}
 
 
-	public UISection sectionFactoryTypeA(){
+
+	/**더보기*/
+	@Override
+	public void onClickLoadMore(UISection section, UIItem moreItem, int sectionIndex) {
+		addItem(dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST, 4), sectionIndex);
+		Toast.makeText(getApplicationContext(), sectionIndex + " 번째 섹션 추가.", Toast.LENGTH_LONG).show();
+	}
+
+
+
+	/**Sample Data*/
+	public UISection sectionTypeA() {
 		UISection section = new UISection();
 		UIItem footer = new UIItem();
 		UIItem header = new UIItem();
@@ -85,7 +120,7 @@ public class ActStickySample extends AppCompatActivity {
 		//header
 		header.putViewType(HIFAdapter.HEADER_A);
 		//items
-		items = dummyItemGenerator("Item",HIFAdapter.ITEM_A,10);
+		items = dummyItemGenerator("Item", HIFAdapter.ITEM_A, 10);
 
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_A);
@@ -98,7 +133,8 @@ public class ActStickySample extends AppCompatActivity {
 
 		return section;
 	}
-	public UISection sectionFactoryTypeB(){
+
+	public UISection sectionTypeB() {
 		UISection section = new UISection();
 		UIItem footer = new UIItem();
 		UIItem header = new UIItem();
@@ -107,7 +143,7 @@ public class ActStickySample extends AppCompatActivity {
 		//header
 		header.putViewType(HIFAdapter.HEADER_B);
 		//items
-		items = dummyItemGenerator("Item",HIFAdapter.ITEM_B,5);
+		items = dummyItemGenerator("Item", HIFAdapter.ITEM_B, 5);
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_B);
 
@@ -117,14 +153,16 @@ public class ActStickySample extends AppCompatActivity {
 		section.setHeader(header);
 		return section;
 	}
-	public UISection GeneratorBannerSection(int banerType){
+
+	public UISection sectionBanner(int banerType) {
 		UISection section = new UISection();
 		ArrayList<UIItem> items = new ArrayList<UIItem>();
-		items = dummyItemGenerator("Item",banerType,1);
+		items = dummyItemGenerator("Item", banerType, 1);
 		section.addItems(items);
 		return section;
 	}
-	public UISection sectionMixType(){
+
+	public UISection sectionMixType() {
 		UISection section = new UISection();
 		UIItem footer = new UIItem();
 		UIItem header = new UIItem();
@@ -133,33 +171,33 @@ public class ActStickySample extends AppCompatActivity {
 		//header
 		header.putViewType(HIFAdapter.HEADER_B);
 		//items
-		UIItem  item1 = new UIItem();
+		UIItem item1 = new UIItem();
 		item1.putViewType(HIFAdapter.ITEM_A);
 		item1.putData("item1");
 
 
-		UIItem  itemHozList = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST,5);
+		UIItem itemHozList = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST, 5);
 
 
-		UIItem  item2 = new UIItem();
+		UIItem item2 = new UIItem();
 		item2.putViewType(HIFAdapter.ITEM_B);
 		item2.putData("item2");
 
-		UIItem  item3 = new UIItem();
+		UIItem item3 = new UIItem();
 		item3.putViewType(HIFAdapter.ITEM_A);
 		item3.putData("item3");
 
 
-		UIItem  itemHozList2 = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST,5);
-		UIItem  item4 = new UIItem();
+		UIItem itemHozList2 = dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST, 5);
+		UIItem item4 = new UIItem();
 		item4.putViewType(HIFAdapter.ITEM_B);
 		item4.putData("item4");
 
-		UIItem  item5 = new UIItem();
+		UIItem item5 = new UIItem();
 		item5.putViewType(HIFAdapter.ITEM_A);
 		item5.putData("item5");
 
-		UIItem  item6 = new UIItem();
+		UIItem item6 = new UIItem();
 		item6.putViewType(HIFAdapter.ITEM_B);
 		item6.putData("item6");
 
@@ -184,11 +222,12 @@ public class ActStickySample extends AppCompatActivity {
 
 		return section;
 	}
-	ArrayList<UIItem> dummyItemGenerator(String name, int viewType ,int cnt){
+
+	ArrayList<UIItem> dummyItemGenerator(String name, int viewType, int cnt) {
 
 		ArrayList<UIItem> uiItems = new ArrayList<>();
-		for(int i=0; i <cnt; i ++){
-			UIItem  item = new UIItem();
+		for (int i = 0; i < cnt; i++) {
+			UIItem item = new UIItem();
 			item.putViewType(viewType);
 			item.putData(name);
 			uiItems.add(item);
@@ -196,21 +235,21 @@ public class ActStickySample extends AppCompatActivity {
 		return uiItems;
 	}
 
-	UIItem dummyHorizontalListItem(int viewType,int cnt){
+	UIItem dummyHorizontalListItem(int viewType, int cnt) {
 
-		UIItem  item = new UIItem();
-		ArrayList<	HozImgListDTO> hozItems = new ArrayList<>();
+		UIItem item = new UIItem();
+		ArrayList<HozImgListDTO> hozItems = new ArrayList<>();
 		item.putViewType(viewType);
 
-		for(int i=0; i <cnt; i ++){
+		for (int i = 0; i < cnt; i++) {
 			HozImgListDTO hozImgListDTO = new HozImgListDTO();
-			hozImgListDTO.setName("이미지 + "+ i);
+			hozImgListDTO.setName("이미지 + " + i);
 
-			if(i%2==0){
+			if (i % 2 == 0) {
 				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2017/12/29/18/47/turkey-3048299_960_720.jpg");
-			}else if(i%3==0){
+			} else if (i % 3 == 0) {
 				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2018/03/12/00/43/portrait-3218469_960_720.jpg");
-			}else{
+			} else {
 				hozImgListDTO.setImgPath("https://cdn.pixabay.com/photo/2015/03/12/04/43/landscape-669619_960_720.jpg");
 			}
 
@@ -220,5 +259,6 @@ public class ActStickySample extends AppCompatActivity {
 		item.putData(hozItems);
 		return item;
 	}
+
 
 }

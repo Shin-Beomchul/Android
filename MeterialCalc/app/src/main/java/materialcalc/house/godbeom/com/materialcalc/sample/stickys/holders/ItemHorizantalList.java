@@ -14,7 +14,7 @@ import butterknife.BindView;
 import materialcalc.house.godbeom.com.materialcalc.R;
 import materialcalc.house.godbeom.com.materialcalc.model.UIItem;
 import materialcalc.house.godbeom.com.materialcalc.model.UISection;
-import materialcalc.house.godbeom.com.materialcalc.sample.stickys.ItemHozListAdapter;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.adapters.ItemHozListAdapter;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyItemHolder;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.dto.HozImgListDTO;
 
