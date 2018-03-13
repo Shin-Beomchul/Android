@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -55,20 +56,9 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 		mHIFStickyAdapter = new HIFAdapter(getApplicationContext(), mSections);
 		mHIFStickyAdapter.setMoreListener(this);
+		changeCol(1);
+//		changeCol(2); //FIXME
 
-
-		StickyHeaderLayoutManager StickylayoutManager = new StickyHeaderLayoutManager();
-		StickylayoutManager.setHeaderPositionChangedCallback(new StickyHeaderLayoutManager.HeaderPositionChangedCallback() {
-			@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-			@Override
-			public void onHeaderPositionChanged(int sectionIndex, View header, StickyHeaderLayoutManager.HeaderPosition oldPosition, StickyHeaderLayoutManager.HeaderPosition newPosition) {
-				if (DeviceUtil.checkEnableVersion(Build.VERSION_CODES.LOLLIPOP)) {
-					boolean elevated = newPosition == StickyHeaderLayoutManager.HeaderPosition.STICKY;
-					header.setElevation(elevated ? 8 : 0);
-				}
-			}
-		});
-		mRecyclerView.setLayoutManager(StickylayoutManager);
 		mRecyclerView.setAdapter(mHIFStickyAdapter);
 	}
 
@@ -76,11 +66,10 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 	 * 업데이트
 	 */
 	public void updateStickyList() {
-		mSections.add(sectionBanner(HIFAdapter.BANNER_A));
+		mSections.add(sectionBanner(HIFAdapter.HEADER_BANNER_A));
 		mSections.add(sectionTypeB());
 		mSections.add(sectionTypeA());
 		mSections.add(sectionMixType());
-
 		mHIFStickyAdapter.notifyAllSectionsDataSetChanged();
 	}
 
@@ -105,6 +94,48 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 	public void onClickLoadMore(UISection section, UIItem moreItem, int sectionIndex) {
 		addItem(dummyHorizontalListItem(HIFAdapter.ITEM_HORIZANTAL_LIST, 4), sectionIndex);
 		Toast.makeText(getApplicationContext(), sectionIndex + " 번째 섹션 추가.", Toast.LENGTH_LONG).show();
+	}
+
+
+
+
+	/**mode 변경*/
+	public void changeCol(int col){
+		if(col ==0 || col ==1){
+			StickyHeaderLayoutManager StickylayoutManager = new StickyHeaderLayoutManager();
+			StickylayoutManager.setHeaderPositionChangedCallback(new StickyHeaderLayoutManager.HeaderPositionChangedCallback() {
+				@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+				@Override
+				public void onHeaderPositionChanged(int sectionIndex, View header, StickyHeaderLayoutManager.HeaderPosition oldPosition, StickyHeaderLayoutManager.HeaderPosition newPosition) {
+					if (DeviceUtil.checkEnableVersion(Build.VERSION_CODES.LOLLIPOP)) {
+						boolean elevated = newPosition == StickyHeaderLayoutManager.HeaderPosition.STICKY;
+						header.setElevation(elevated ? 8 : 0);
+					}
+				}
+			});
+			mRecyclerView.setLayoutManager(StickylayoutManager);
+
+			/*try Grid*/
+		}else{
+			final GridLayoutManager manager = new GridLayoutManager(this, col);
+			mRecyclerView.setLayoutManager(manager);
+			manager.setItemPrefetchEnabled(false);
+			manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+				@Override
+				public int getSpanSize(int position) {
+					int sectionIdx = mHIFStickyAdapter.getSectionForAdapterPosition(position);
+//					int sectionInItemIdx =mHIFStickyAdapter.getPositionOfItemInSection(sectionIdx,position);
+					int headerPos =mHIFStickyAdapter.getAdapterPositionForSectionHeader(sectionIdx);
+					int footerPos =mHIFStickyAdapter.getAdapterPositionForSectionFooter(sectionIdx);
+					if (mSections.get(sectionIdx).hasHeader() && headerPos ==position ||
+						mSections.get(sectionIdx).hasFooter() && footerPos ==position ) {
+						return manager.getSpanCount();
+					}
+					return 1;
+				}
+			});
+			mRecyclerView.setLayoutManager(manager);
+		}
 	}
 
 
@@ -141,10 +172,12 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 		//header
 		header.putViewType(HIFAdapter.HEADER_A);
+		header.setItemRow(false);
 		//items
 		items = dummyItemGenerator("Item", HIFAdapter.ITEM_A, 10);
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_A);
+		footer.setItemRow(false);
 
 
 		section.addItems(items);
@@ -163,10 +196,12 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 		//header
 		header.putViewType(HIFAdapter.HEADER_B);
+		header.setItemRow(false);
 		//items
 		items = dummyItemGenerator("Item", HIFAdapter.ITEM_B, 5);
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_B);
+		footer.setItemRow(false);
 
 
 		section.addItems(items);
@@ -177,9 +212,7 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 	public UISection sectionBanner(int banerType) {
 		UISection section = new UISection();
-		ArrayList<UIItem> items = new ArrayList<UIItem>();
-		items = dummyItemGenerator("Item", banerType, 1);
-		section.addItems(items);
+		section.setHeader(BannerItemGenerator(banerType));
 		return section;
 	}
 
@@ -254,6 +287,14 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 			uiItems.add(item);
 		}
 		return uiItems;
+	}
+
+	public UIItem BannerItemGenerator(int bannerType){
+		UIItem item = new UIItem();
+		item.putViewType(bannerType);
+		item.putData("NANNER");
+		item.setItemRow(false);
+		return item;
 	}
 
 	UIItem dummyHorizontalListItem(int viewType, int cnt) {

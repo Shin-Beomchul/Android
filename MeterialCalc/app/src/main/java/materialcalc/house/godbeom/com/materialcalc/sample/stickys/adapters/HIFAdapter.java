@@ -21,7 +21,7 @@ import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.Header
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.HeaderB;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.ItemA;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.ItemB;
-import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.ItemBannerA;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.HeaderBannerA;
 import materialcalc.house.godbeom.com.materialcalc.sample.stickys.holders.ItemHorizantalList;
 
 /**
@@ -32,7 +32,7 @@ public class HIFAdapter extends SectioningAdapter{
 
 
 
-	public final static int BANNER_A = 0;
+
 	public final static int ITEM_A = 1;
 	public final static int ITEM_B = 2;
 
@@ -41,6 +41,7 @@ public class HIFAdapter extends SectioningAdapter{
 
 	public final static int HEADER_A = 5;
 	public final static int HEADER_B = 6;
+	public final static int HEADER_BANNER_A = 0;
 
 	public final static int ITEM_HORIZANTAL_LIST = 7;
 	FooterA.MoreListener moreListener;
@@ -97,7 +98,7 @@ public class HIFAdapter extends SectioningAdapter{
 	 */
 	@Override
 	public int getSectionItemUserType(int sectionIndex, int itemIndex) {
-		return mSections.get(sectionIndex).getItems().get(itemIndex).getViewType(); 
+		return mSections.get(sectionIndex).getItems().get(itemIndex).getViewType();
 	}
 
 	/**
@@ -118,19 +119,13 @@ public class HIFAdapter extends SectioningAdapter{
 				return new ItemA(R.layout.item_a, parent, false); //Code Type 2 -Adapter  view Res 트레이싱용.
 			case ITEM_B:
 				return new ItemB(inflateHolderView(R.layout.item_b, parent, false)); //Code Type 1 -Adapter
-
 			case ITEM_HORIZANTAL_LIST:
 				return new ItemHorizantalList(R.layout.item_list_content, parent, false);
-			case BANNER_A:
-				return new ItemBannerA(inflateHolderView(R.layout.item_benner, parent, false));
 			default:
 				return new ItemB(inflateHolderView(R.layout.item_b, parent, false));
 		}
 	}
 
-	private int getItemLayoutId(int sectionIdx) {
-		return (int) mSections.get(sectionIdx).getHeader().getViewType();
-	}
 
 
 	@Override
@@ -140,6 +135,8 @@ public class HIFAdapter extends SectioningAdapter{
 				return new HeaderA(inflateHolderView(R.layout.header_a, parent, false));
 			case HEADER_B:
 				return new HeaderB(inflateHolderView(R.layout.header_b, parent, false));
+			case HEADER_BANNER_A:
+				return new HeaderBannerA(inflateHolderView(R.layout.item_benner, parent, false));
 			default:
 				return new HeaderB(inflateHolderView(R.layout.header_b, parent, false));
 		}
@@ -190,4 +187,6 @@ public class HIFAdapter extends SectioningAdapter{
 	public void setMoreListener(FooterA.MoreListener moreListener) {
 		this.moreListener = moreListener;
 	}
+
+
 }

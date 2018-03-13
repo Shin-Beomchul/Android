@@ -64,4 +64,21 @@ public class UISection {
         mFooter = null;
         mItems.clear();
     }
+
+    public int getSectionItemSize(){
+        if(mItems.isEmpty())
+            return 0;
+
+        int sectionTotalSize = mItems.size();
+
+        if(hasFooter()){
+            sectionTotalSize++;
+        }
+        if(hasHeader()){
+            sectionTotalSize++;
+        }
+
+        return sectionTotalSize;
+
+    }
 }

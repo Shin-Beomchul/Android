@@ -4,14 +4,14 @@ import android.view.View;
 
 import materialcalc.house.godbeom.com.materialcalc.model.UIItem;
 import materialcalc.house.godbeom.com.materialcalc.model.UISection;
-import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyItemHolder;
+import materialcalc.house.godbeom.com.materialcalc.sample.stickys.base.StickyHeaderHolder;
 
 /**
  * Created by BeomChul.Shin on 2018-03-07.
  */
 
-public class ItemBannerA extends StickyItemHolder {
-	public ItemBannerA(View itemView) {
+public class HeaderBannerA extends StickyHeaderHolder {
+	public HeaderBannerA(View itemView) {
 		super(itemView);
 	}
 
@@ -21,7 +21,9 @@ public class ItemBannerA extends StickyItemHolder {
 	}
 
 	@Override
-	public void onBind(UISection section, UIItem item, int sectionIndex, int itemIndex, int itemType) {
+	public void onBind(UISection section, UIItem item, int sectionIndex, int itemType) {
 
 	}
+
+
 }
