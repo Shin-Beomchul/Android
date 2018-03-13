@@ -172,12 +172,10 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 		//header
 		header.putViewType(HIFAdapter.HEADER_A);
-		header.setItemRow(false);
 		//items
 		items = dummyItemGenerator("Item", HIFAdapter.ITEM_A, 10);
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_A);
-		footer.setItemRow(false);
 
 
 		section.addItems(items);
@@ -196,12 +194,10 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 
 		//header
 		header.putViewType(HIFAdapter.HEADER_B);
-		header.setItemRow(false);
 		//items
 		items = dummyItemGenerator("Item", HIFAdapter.ITEM_B, 5);
 		//footer
 		footer.putViewType(HIFAdapter.FOOTER_B);
-		footer.setItemRow(false);
 
 
 		section.addItems(items);
@@ -293,7 +289,6 @@ public class ActStickySample extends AppCompatActivity implements FooterA.MoreLi
 		UIItem item = new UIItem();
 		item.putViewType(bannerType);
 		item.putData("NANNER");
-		item.setItemRow(false);
 		return item;
 	}
 
