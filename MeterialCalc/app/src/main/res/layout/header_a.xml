@@ -7,6 +7,7 @@
 
 
     <TextView
+        android:id="@+id/headerTv"
         android:paddingLeft="15dp"
         android:background="@color/colorAccent"
         android:gravity="left|center_vertical"

@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".sample.stickys.ActStickySample">
         </activity>
+        <activity android:name=".sample.section.ActSectionSample">
+        </activity>
     </application>
 
 </manifest>

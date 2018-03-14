@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:id="@+id/llbtnsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffffff"
+            android:text="Curriculum"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            />
+        <Button
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffffff"
+            android:text="검증된 강사진"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+        />
+
+        <Button
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ffffffff"
+            android:text="학습 시스템"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+          />
+
+    </LinearLayout>
+    <ImageView
+        android:layout_below="@+id/llbtnsContainer"
+        android:id="@+id/ivTab"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sampleimg"/>
+
+</RelativeLayout>

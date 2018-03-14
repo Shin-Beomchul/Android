@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:background="#33aaaaaa">
 
         <android.support.v7.widget.CardView
-            android:foreground="?attr/selectableItemBackground"
-            android:clickable="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -28,6 +28,7 @@
             android:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/tvItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

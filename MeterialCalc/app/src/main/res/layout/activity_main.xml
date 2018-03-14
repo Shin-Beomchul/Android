@@ -18,6 +18,12 @@
             android:layout_height="50dp"/>
 
         <Button
+            android:id="@+id/sectionRecyclerView"
+            android:text="section RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <Button
             android:id="@+id/btnRipple"
             android:text="Free OS Background with RIPPLE"
             android:layout_width="match_parent"

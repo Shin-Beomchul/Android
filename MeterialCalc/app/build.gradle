@@ -26,6 +26,7 @@ dependencies {
 
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
 
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -35,7 +36,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-config:11.6.2'//remoteConfig
     implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.6'// sticky
-    implementation 'com.github.bumptech.glide:glide:4.3.1'         //Glide Version Ref : https://github.com/bumptech/glide/issues/2730
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    //Glide Version Ref : https://github.com/bumptech/glide/issues/2730
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
 
     compile 'com.jakewharton:butterknife:8.8.0'
