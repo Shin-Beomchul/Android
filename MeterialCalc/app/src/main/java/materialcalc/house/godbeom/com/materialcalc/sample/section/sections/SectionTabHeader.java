@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import materialcalc.house.godbeom.com.materialcalc.R;
@@ -51,6 +54,11 @@ public class SectionTabHeader extends StatelessSection {
 	@Override
 	public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
 		final ItemTabHolderA itemHolder = (ItemTabHolderA) holder;
+		Glide.with(itemHolder.iv_itemA.getContext())
+				.load(list.get(position).getImageUrl())
+				.apply(new RequestOptions().centerCrop().placeholder(R.mipmap.ic_launcher_round))
+				.into(itemHolder.iv_itemA);
+
 
 	}
 

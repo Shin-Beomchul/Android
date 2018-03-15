@@ -3,9 +3,14 @@ package materialcalc.house.godbeom.com.materialcalc.sample.section.sections;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import butterknife.BindView;
 import materialcalc.house.godbeom.com.materialcalc.R;
 import materialcalc.house.godbeom.com.materialcalc.sample.section.dtos.SectionDTO;
 import materialcalc.house.godbeom.com.materialcalc.sample.section.sectionedrecyclerviewadapter.SectionParameters;
@@ -52,6 +57,11 @@ public class SectionHozRow extends StatelessSection {
 	@Override
 	public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
 		final ItemTabMoreHolderA itemHolder = (ItemTabMoreHolderA) holder;
+
+		Glide.with(itemHolder.iv_itemA.getContext())
+				.load(list.get(position).getImageUrl())
+				.apply(new RequestOptions().centerCrop().placeholder(R.mipmap.ic_launcher_round))
+				.into(itemHolder.iv_itemA);
 	}
 
 
@@ -63,6 +73,8 @@ public class SectionHozRow extends StatelessSection {
 
 
 	class ItemTabMoreHolderA extends BaseHolder {
+		@BindView(R.id.iv_itemA)
+		ImageView iv_itemA;
 
 		public ItemTabMoreHolderA(View itemView) {
 			super(itemView);
