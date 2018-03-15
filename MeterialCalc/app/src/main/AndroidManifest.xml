@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".sample.section.ActSectionSample">
         </activity>
+        <activity android:name=".sample.purelists.ActMultiListSample">
+        </activity>
     </application>
 
 </manifest>
