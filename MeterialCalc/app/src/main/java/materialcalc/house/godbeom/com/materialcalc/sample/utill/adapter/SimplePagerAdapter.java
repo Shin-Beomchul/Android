@@ -1,9 +1,9 @@
-package materialcalc.house.godbeom.com.materialcalc.sample.section.adapters;
+package materialcalc.house.godbeom.com.materialcalc.sample.utill.adapter;
 
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import materialcalc.house.godbeom.com.materialcalc.sample.section.fragments.FmtTabA;
-import materialcalc.house.godbeom.com.materialcalc.sample.section.fragments.FmtTabB;
+import materialcalc.house.godbeom.com.materialcalc.sample.utill.fragments.FmtTabA;
+import materialcalc.house.godbeom.com.materialcalc.sample.utill.fragments.FmtTabB;
 
 /**
  * Created by Administrator on 2018-03-15.

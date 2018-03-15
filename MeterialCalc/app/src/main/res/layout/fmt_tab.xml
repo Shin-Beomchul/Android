@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="materialcalc.house.godbeom.com.materialcalc.sample.section.fragments.FmtTabA">
+             tools:context=".sample.utill.fragments.FmtTabA">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView

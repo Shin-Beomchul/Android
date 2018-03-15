@@ -58,8 +58,6 @@ public class SectionTabHeader extends StatelessSection {
 				.load(list.get(position).getImageUrl())
 				.apply(new RequestOptions().centerCrop().placeholder(R.mipmap.ic_launcher_round))
 				.into(itemHolder.iv_itemA);
-
-
 	}
 
 	/*더보기*/

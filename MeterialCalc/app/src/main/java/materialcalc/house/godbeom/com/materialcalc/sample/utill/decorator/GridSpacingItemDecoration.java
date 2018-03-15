@@ -1,4 +1,4 @@
-package materialcalc.house.godbeom.com.materialcalc.sample.section.deco;
+package materialcalc.house.godbeom.com.materialcalc.sample.utill.decorator;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
