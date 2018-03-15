@@ -3,9 +3,6 @@ package materialcalc.house.godbeom.com.materialcalc.sample.section.sections;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -13,9 +10,11 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-import butterknife.BindView;
 import materialcalc.house.godbeom.com.materialcalc.R;
 import materialcalc.house.godbeom.com.materialcalc.sample.section.dtos.SectionDTO;
+import materialcalc.house.godbeom.com.materialcalc.sample.section.holders.FooterHolderA;
+import materialcalc.house.godbeom.com.materialcalc.sample.section.holders.HeaderHolderA;
+import materialcalc.house.godbeom.com.materialcalc.sample.section.holders.ItemHolderA;
 import materialcalc.house.godbeom.com.materialcalc.sample.section.sectionedrecyclerviewadapter.SectionParameters;
 import materialcalc.house.godbeom.com.materialcalc.sample.section.sectionedrecyclerviewadapter.StatelessSection;
 
@@ -92,39 +91,5 @@ public class SectionTypeA extends StatelessSection {
 		super.onBindFooterViewHolder(holder);
 	}
 
-
-	class ItemHolderA extends BaseHolder {
-		@BindView(R.id.tvItem)
-		TextView tvItem;
-
-		@BindView(R.id.iv_itemA)
-		ImageView iv_itemA;
-
-
-		public ItemHolderA(View itemView) {
-			super(itemView);
-		}
-	}
-
-
-	class HeaderHolderA extends BaseHolder {
-		@BindView(R.id.headerTv)
-		TextView tvHeader;
-
-		public HeaderHolderA(View itemView) {
-			super(itemView);
-		}
-	}
-
-
-	class FooterHolderA extends BaseHolder {
-
-		@BindView(R.id.morebtn)
-		Button morebtn;
-
-		public FooterHolderA(View itemView) {
-			super(itemView);
-		}
-	}
 
 }
