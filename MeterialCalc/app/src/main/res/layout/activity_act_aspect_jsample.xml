@@ -73,5 +73,11 @@
             android:layout_height="wrap_content"
             android:text="몽키 클릭 방지\n(짧은 시간동안 여러번 버튼을 누르는 행동)"/>
 
+        <Button
+            android:id="@+id/delayPostUi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2초 후 Ui 스레드로 실행"/>
+
     </LinearLayout>
 </FrameLayout>

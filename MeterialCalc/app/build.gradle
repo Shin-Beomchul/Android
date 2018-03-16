@@ -14,13 +14,58 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-    buildTypes {
+
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
         release {
+            storeFile file("${project.rootDir}/keystore/denple.keystore")
+            storePassword "pw"
+            keyAlias "별칭"
+            keyPassword "pw"
+        }
+    }
+
+    def INT = "int"
+    def STRING = "String"
+    def BOOLEAN = "boolean"
+    def TRUE = "true"
+    def FALSE = "false"
+    def SERVER_TYPE = "SERVER_TYPE"
+    def PRODUCTION = "\"PRODUCTION\""
+    def DEV = "\"DEV\""
+    def AMAZON = "\"AMAZON\""
+
+
+
+
+    buildTypes {
+        debug {
+            // BuildType for dev
+            buildConfigField STRING, SERVER_TYPE, AMAZON
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            // BuildType for release
+            buildConfigField STRING, SERVER_TYPE, PRODUCTION
+            shrinkResources false
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
     }
 }
+
+
+def SERVER_TYPE = "SERVER_TYPE"
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -44,6 +89,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile project(path: ':retrofit2')
+
 
 }
 
