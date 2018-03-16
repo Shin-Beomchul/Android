@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="materialcalc.house.godbeom.com.materialcalc.sample.aspectj.ActAspectJSample">
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_gravity="right"
+        android:gravity="center|bottom"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvUiObject"
+            android:background="#aa00ff00"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="I'm Run ui Thread"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ui Thread Checker"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="materialcalc.house.godbeom.com.materialcalc.sample.aspectj.ActAspectJSample">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnSubHooker"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Sub 스레드에서 Ui 스레드로 5번 Print "/>
+
+        <Button
+            android:id="@+id/btnMainHooker"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="UiThread Sleep!"/>
+
+
+        <Button
+            android:id="@+id/ClickMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="몽키 클릭 방지\n(짧은 시간동안 여러번 버튼을 누르는 행동)"/>
+
+    </LinearLayout>
+</FrameLayout>
