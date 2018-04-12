@@ -58,7 +58,7 @@
             android:id="@+id/btnSubHooker"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Sub 스레드에서 Ui 스레드로 5번 Print "/>
+            android:text="SubThread Printer"/>
 
         <Button
             android:id="@+id/btnMainHooker"
