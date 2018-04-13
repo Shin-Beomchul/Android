@@ -13,7 +13,7 @@ import android.util.Log;
 
 import java.io.File;
 
-import develop.godbeom.com.myapplication.cache.mMemoryLruCache;
+import develop.godbeom.com.myapplication.cache.MemoryLruCache;
 
 public class Utils {
     public static final int IO_BUFFER_SIZE = 8 * 1024;
@@ -94,7 +94,7 @@ public class Utils {
      * 
      * @return LruCache<String, Bitmap>
      */
-    public static mMemoryLruCache createDefaultBitmapLruCache() {
+    public static MemoryLruCache createDefaultBitmapLruCache() {
         // Get max available VM memory, exceeding this amount will throw an
         // OutOfMemory exception. Stored in kilobytes as LruCache takes an
         // int in its constructor.
@@ -108,7 +108,7 @@ public class Utils {
 
         Log.d(TAG, "Initializing LruCache with size " + cacheSize + "kb");
 
-        return new mMemoryLruCache(cacheSize);
+        return new MemoryLruCache(cacheSize);
     }
 
     public static int dpToPx(final Context context, final int dp) {

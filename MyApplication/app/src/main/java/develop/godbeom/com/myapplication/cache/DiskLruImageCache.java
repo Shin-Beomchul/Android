@@ -3,6 +3,7 @@ package develop.godbeom.com.myapplication.cache;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.jakewharton.disklrucache.DiskLruCache;
@@ -112,7 +113,7 @@ public class DiskLruImageCache {
             final InputStream in = snapshot.getInputStream(0);
             if (in != null) {
                 final BufferedInputStream buffIn = new BufferedInputStream(in, develop.godbeom.com.myapplication.util.Utils.IO_BUFFER_SIZE);
-                bitmap = BitmapProcessor.decodeStream(buffIn);
+                bitmap = decodeStream(buffIn);
             }
         } catch (final IOException e) {
             Log.e(TAG, "ERROR getBitmap", e);
@@ -123,6 +124,14 @@ public class DiskLruImageCache {
         }
 
         return bitmap;
+    }
+    public static Bitmap decodeStream(final InputStream stream) {
+        try {
+            return BitmapFactory.decodeStream(stream);
+        } catch (final OutOfMemoryError e) {
+            Log.e(TAG, "Out of memory in decodeStream()", e);
+            return null;
+        }
     }
 
     public boolean containsKey(final String key) {

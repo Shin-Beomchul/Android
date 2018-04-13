@@ -102,30 +102,19 @@ public class actMain extends AppCompatActivity  {
 			result.add("/Images/Thumbnails/1334/133491.jpg");
 			result.add("/Images/Thumbnails/1480/148062.jpg");
 
-			result.add("/Images/Thumbnails/1387/138719.jpg");
-			result.add("/Images/Thumbnails/1334/133451.jpg");
-			result.add("/Images/Thumbnails/1334/133491.jpg");
-			result.add("/Images/Thumbnails/1480/148062.jpg");
+			result.add("/Images/Thumbnails/1461/146172.jpg");
+			result.add("/Images/Thumbnails/1463/146322.jpg");
+			result.add("/Images/Thumbnails/1473/147352.jpg");
+			result.add("/Images/Thumbnails/1461/146192.jpg");
 
-			result.add("/Images/Thumbnails/1387/138719.jpg");
-			result.add("/Images/Thumbnails/1334/133451.jpg");
-			result.add("/Images/Thumbnails/1334/133491.jpg");
-			result.add("/Images/Thumbnails/1480/148062.jpg");
+			result.add("/Images/Thumbnails/1465/146552.jpg");
+			result.add("/Images/Thumbnails/1465/146522.jpg");
+			result.add("/Images/Thumbnails/1462/146232.jpg");
+			result.add("/Images/Thumbnails/1468/146807.jpg");
 
-			result.add("/Images/Thumbnails/1387/138719.jpg");
-			result.add("/Images/Thumbnails/1334/133451.jpg");
-			result.add("/Images/Thumbnails/1334/133491.jpg");
-			result.add("/Images/Thumbnails/1480/148062.jpg");
 
-			result.add("/Images/Thumbnails/1387/138719.jpg");
-			result.add("/Images/Thumbnails/1334/133451.jpg");
-			result.add("/Images/Thumbnails/1334/133491.jpg");
-			result.add("/Images/Thumbnails/1480/148062.jpg");
+			result.add("/Images/Thumbnails/1473/147357.jpg");
 
-			result.add("/Images/Thumbnails/1387/138719.jpg");
-			result.add("/Images/Thumbnails/1334/133451.jpg");
-			result.add("/Images/Thumbnails/1334/133491.jpg");
-			result.add("/Images/Thumbnails/1480/148062.jpg");
 
 
 				ImageAdapter adapter = new ImageAdapter(getApplicationContext(),result);

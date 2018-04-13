@@ -1,21 +1,20 @@
 package develop.godbeom.com.myapplication.loader;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
+import java.util.function.Function;
 
-import develop.godbeom.com.myapplication.cache.mMemoryLruCache;
+import develop.godbeom.com.myapplication.cache.DiskLruImageCache;
+import develop.godbeom.com.myapplication.cache.MemoryLruCache;
 import develop.godbeom.com.myapplication.loader.old.ThreadSupplier;
 
 /**
@@ -24,22 +23,47 @@ import develop.godbeom.com.myapplication.loader.old.ThreadSupplier;
 
 public class MyLoader {
 
-	List<Future<Bitmap>> resultList = new ArrayList<>();
-	//	MemoryCache memoryCache = new MemoryCache();
-	mMemoryLruCache memoryCache = null;
+	private static Function<Context,MyLoader> holderFunctional = new MyLoaderHolder();
+
+	MemoryLruCache memoryCache = null;
+	DiskLruImageCache diskLRuCache = null;
 
 
-	private MyLoader() {
+	//initer
+	private MyLoader(Context context) {
 		int deviceMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-		memoryCache = new mMemoryLruCache(deviceMemory / 8);
+		memoryCache = new MemoryLruCache(deviceMemory/2);
+		diskLRuCache =  DiskLruImageCache.getInstance(context);
+
+
 	}
 
-	public static MyLoader getInstance() {
-		return LazyHolder.INSTANCE;
+
+	//LazySingleton with param
+	private static class MyLoaderHolder implements Function<Context ,MyLoader>{
+
+		//Only One Race
+		@Override
+		public synchronized  MyLoader apply(Context context) {
+			class MyLoaderFactory implements Function<Context, MyLoader>{
+
+				private final MyLoader INSTANCE = new MyLoader(context);
+
+				@Override
+				public MyLoader apply(Context context) {
+					return INSTANCE;
+				}
+			}
+			if (!MyLoaderFactory.class.isInstance(holderFunctional)) {
+				holderFunctional = new MyLoaderFactory();
+			}
+
+			return holderFunctional.apply(context);
+		}
 	}
 
-	private static class LazyHolder {
-		private static final MyLoader INSTANCE = new MyLoader();
+	public static MyLoader getInstance(Context context) {
+		return holderFunctional.apply(context.getApplicationContext());
 	}
 
 	public MyLoader load(String url, ImageView iv) {
@@ -48,14 +72,20 @@ public class MyLoader {
 			throw new IllegalArgumentException("You must call this method on the main thread");
 		}
 
+
 		Bitmap memCache = memoryCache.getBitmapFromMemCache(url);
+		Bitmap diskCache = diskLRuCache.getBitmap(String.valueOf(url.hashCode()));
+
 		if (memCache != null) {
 			iv.setImageBitmap(memCache);
-		} else {
+		}else if(diskCache!=null){
+			iv.setImageBitmap(diskCache);
+		}else {
 			loadBitmap(url, bitmap -> {
 				memoryCache.addBitmapToMemoryCache(url, bitmap);
+				diskLRuCache.put(String.valueOf(url.hashCode()),bitmap);
 				iv.setImageBitmap(bitmap);
-				bitmap = null; //Dalvik VM Heap Version old(Bitmap.recycle())
+				//bitmap = null; //Dalvik VM Heap Version old(Bitmap.recycle())
 			});
 		}
 		return this;
@@ -71,12 +101,6 @@ public class MyLoader {
 						conn.setDoOutput(false);
 						conn.connect();
 						Bitmap bitmap = BitmapFactory.decodeStream(conn.getInputStream());
-						public static byte[] toByteArray(InputStream input) throws IOException {
-							ByteArrayOutputStream output = new ByteArrayOutputStream();
-							copy((InputStream)input, (OutputStream)output);
-							return output.toByteArray();
-						}
-
 
 						onComplete.bitMap(bitmap);
 					} catch (Exception e) {
@@ -88,6 +112,17 @@ public class MyLoader {
 
 	public void into(ImageView iv) {
 
+	}
+
+	private boolean hasImage(@NonNull ImageView view) {
+		Drawable drawable = view.getDrawable();
+		boolean hasImage = (drawable != null);
+
+		if (hasImage && (drawable instanceof BitmapDrawable)) {
+			hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+		}
+
+		return hasImage;
 	}
 
 
@@ -117,7 +152,7 @@ public class MyLoader {
 	}
 
 
-	public static byte[] toByteArray(InputStream input) throws IOException {
+	/*public static byte[] toByteArray(InputStream input) throws IOException {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		copy((InputStream)input, (OutputStream)output);
 		return output.toByteArray();
@@ -130,7 +165,7 @@ public class MyLoader {
 
 	public static long copyLarge(InputStream input, OutputStream output) throws IOException {
 		return copyLarge(input, output, new byte[4096]);
-	}
+	}*/
 
 	public static boolean isOnMainThread() {
 		return Looper.myLooper() == Looper.getMainLooper();

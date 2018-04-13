@@ -6,12 +6,9 @@ import android.util.LruCache;
 /**
  * Created by Administrator on 2018-04-13.
  */
-/**
- *
- * */
-//		final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-public class mMemoryLruCache extends LruCache<String,Bitmap> {
-	public mMemoryLruCache(int maxSize) {
+
+public class MemoryLruCache extends LruCache<String,Bitmap> {
+	public MemoryLruCache(int maxSize) {
 		super(maxSize/8);
 	}
 
