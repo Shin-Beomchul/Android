@@ -25,6 +25,11 @@ public class BitmapCallableTask implements Callable<Bitmap> {
 		conn.setDoOutput(false);
 		conn.connect();
 		bitmap = BitmapFactory.decodeStream(conn.getInputStream());
+
+
+
+//		ThumbnailUtils.extractThumbnail(bitmap, 30, 30);
+
 		return bitmap;
 	}
 }

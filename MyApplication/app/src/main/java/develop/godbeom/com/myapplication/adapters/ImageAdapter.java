@@ -7,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import java.util.Collections;
 import java.util.List;
 
 import develop.godbeom.com.myapplication.Constant;
 import develop.godbeom.com.myapplication.R;
+import develop.godbeom.com.myapplication.loader.MyLoader;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
@@ -39,10 +37,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		String url = urls.get(position);
 
-		Glide.with(holder.iv.getContext())
+		MyLoader.getInstance()
+				.load(Constant.baseDomain + url,holder.iv);
+
+
+		/*  Glide.with(holder.iv.getContext())
 				.load(Constant.baseDomain + url)
 				.apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round))
-				.into(holder.iv);
+				.into(holder.iv);*/
 
 
 	}
@@ -51,10 +53,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 	public int getItemCount() {
 		return urls.size();
 	}
-
-
-
-
 
 
 	public void setClickListener(ItemClickListener itemClickListener) {
