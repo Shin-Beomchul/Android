@@ -1,5 +1,6 @@
 package develop.godbeom.com.myapplication.loader;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,9 +14,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.function.Function;
 
+import develop.godbeom.com.myapplication.cache.CacheDiskLru;
 import develop.godbeom.com.myapplication.cache.DiskLruImageCache;
 import develop.godbeom.com.myapplication.cache.MemoryLruCache;
 import develop.godbeom.com.myapplication.loader.old.ThreadSupplier;
+import develop.godbeom.com.myapplication.util.RetainFragment;
 
 /**
  * Created by Administrator on 2018-04-11.
@@ -26,14 +29,17 @@ public class MyLoader {
 	private static Function<Context,MyLoader> holderFunctional = new MyLoaderHolder();
 
 	MemoryLruCache memoryCache = null;
-	DiskLruImageCache diskLRuCache = null;
+	CacheDiskLru diskLRuCache = null;
+
+
 
 
 	//initer
 	private MyLoader(Context context) {
-		int deviceMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-		memoryCache = new MemoryLruCache(deviceMemory/2);
-		diskLRuCache =  DiskLruImageCache.getInstance(context);
+//		int deviceMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+//		memoryCache = new MemoryLruCache(deviceMemory);
+		memoryCache = initMemCache(context);
+		diskLRuCache =  CacheDiskLru.getInstance(context.getApplicationContext());
 
 
 	}
@@ -63,7 +69,7 @@ public class MyLoader {
 	}
 
 	public static MyLoader getInstance(Context context) {
-		return holderFunctional.apply(context.getApplicationContext());
+		return holderFunctional.apply(context);
 	}
 
 	public MyLoader load(String url, ImageView iv) {
@@ -73,25 +79,55 @@ public class MyLoader {
 		}
 
 
-		Bitmap memCache = memoryCache.getBitmapFromMemCache(url);
-		Bitmap diskCache = diskLRuCache.getBitmap(String.valueOf(url.hashCode()));
+		String hashedUrl = String.valueOf(url.hashCode());
+
+		Bitmap memCache = memoryCache.getBitmapFromMemCache(hashedUrl);
+		Bitmap diskCache = diskLRuCache.getBitmap(hashedUrl);
 
 		if (memCache != null) {
 			iv.setImageBitmap(memCache);
-		}else if(diskCache!=null){
+		}
+		else if(diskCache != null){
 			iv.setImageBitmap(diskCache);
-		}else {
+		}
+		else {
 			loadBitmap(url, bitmap -> {
-				memoryCache.addBitmapToMemoryCache(url, bitmap);
-				diskLRuCache.put(String.valueOf(url.hashCode()),bitmap);
-				iv.setImageBitmap(bitmap);
+
+				Bitmap resizeBitmap =resizeBitmap(bitmap);
+
+				memoryCache.addBitmapToMemoryCache(hashedUrl, resizeBitmap);
+				diskLRuCache.addBitmap(hashedUrl,resizeBitmap);
+
+				ThreadSupplier.getInstance().forMainThreadTasks().execute(() -> iv.setImageBitmap(resizeBitmap));
 				//bitmap = null; //Dalvik VM Heap Version old(Bitmap.recycle())
 			});
 		}
 		return this;
 	}
 
-	public MyLoader loadBitmap(String url, onComplete onComplete) {
+	private Bitmap resizeBitmap(Bitmap bitmap){
+		int height = bitmap.getHeight();
+
+		int width = bitmap.getWidth();
+
+		Bitmap resized = null;
+
+		while (height > 118) {
+
+
+			resized = Bitmap.createScaledBitmap(bitmap, (width * 118) / height, 118, true);
+
+			height = resized.getHeight();
+
+			width = resized.getWidth();
+
+		}
+
+		return resized;
+
+	}
+
+	private void loadBitmap(String url, onComplete onComplete) {
 		ThreadSupplier.getInstance().backGroundPool()
 				.execute(() -> {
 					try {
@@ -107,11 +143,25 @@ public class MyLoader {
 						e.printStackTrace();
 					}
 				});
-		return this;
+
 	}
 
 	public void into(ImageView iv) {
 
+	}
+
+
+	public MemoryLruCache initMemCache(Context context){
+		RetainFragment retainFragment = RetainFragment.findOrCreateRetainFragment(((Activity)context).getFragmentManager());
+		MemoryLruCache mMemoryCache = retainFragment.mRetainedCache;
+		if (mMemoryCache == null) {
+			int deviceMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+			mMemoryCache = new MemoryLruCache(deviceMemory/2);
+			retainFragment.mRetainedCache = mMemoryCache;
+			return retainFragment.mRetainedCache;
+		}else{
+			throw new NullPointerException("MemCache Init False!");
+		}
 	}
 
 	private boolean hasImage(@NonNull ImageView view) {

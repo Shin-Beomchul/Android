@@ -45,12 +45,13 @@ public class ThreadSupplier {
 	* constructor for  DefaultExecutorSupplier
 	*/
 	public ThreadSupplier() {
+
+
 		ThreadFactory backgroundPriorityThreadFactory = new
 				PriorityThreadFactory(Process.THREAD_PRIORITY_BACKGROUND);
-
 		mForBackgroundTasks = new ThreadPoolExecutor(
-				NUMBER_OF_CORES,
-				NUMBER_OF_CORES,
+				2,
+				2,
 				60L,
 				TimeUnit.SECONDS,
 				new LinkedBlockingQueue<>(),

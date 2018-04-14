@@ -1,12 +1,15 @@
 package develop.godbeom.com.myapplication.adapters;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +25,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 	private LayoutInflater mInflater;
 	private ItemClickListener mClickListener;
 
-	public ImageAdapter(Context context, List<String> animals) {
+	public ImageAdapter(Activity context, List<String> animals) {
+
 		this.mInflater = LayoutInflater.from(context);
 		this.urls = animals;
 	}
@@ -42,10 +46,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
  				.load(Constant.baseDomain + url,holder.iv);
 
 
-/*		   Glide.with(holder.iv.getContext())
+
+ 		Glide.with(holder.iv.getContext())
 				.load(Constant.baseDomain + url)
 				.apply(new RequestOptions().placeholder(R.mipmap.ic_launcher_round))
-				.into(holder.iv);*/
+				.into(holder.iv);
 
 
 	}
