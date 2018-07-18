@@ -2,7 +2,6 @@ package com.house.godbeom.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivityKotlin : AppCompatActivity() {
@@ -10,17 +9,27 @@ class MainActivityKotlin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+       //www.androidhuman.com/lecture/kotlin/2016/07/06/kotlin_let_apply_run_with/
 
+        //lazy
 
-        ExampleTempleteKotlin<Int>()
-                .setExampleFunction {
-                    var temp: String? = null
-                     temp?.length
+        //data
 
-                }
+        //get set
 
-                .print { tv.text=it.toString()}
-                .doStart()
+        //let
+
+        //run
+
+        //with
+
+        //생성자
+
+        //apply
+
+        //함수 확장
+
+        //!! ?? !? ?:
 
 
     }

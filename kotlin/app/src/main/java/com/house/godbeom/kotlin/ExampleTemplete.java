@@ -1,5 +1,7 @@
 package com.house.godbeom.kotlin;
 
+import android.widget.TextView;
+
 /**
  * Created by Administrator on 2018-04-10.
  */
@@ -27,8 +29,15 @@ public class ExampleTemplete<R> implements BaseTask<R> {
 	}
 
 	@Override
+	public BaseTask print(TextView view) {
+		String  result=String.valueOf(consumer.Example());
+		view.setText(result);
+		return this;
+	}
+
+	@Override
 	public void doStart(){
-		resultSubScribe.result(consumer.Example());;
+		resultSubScribe.result(consumer.Example());
 	}
 
 

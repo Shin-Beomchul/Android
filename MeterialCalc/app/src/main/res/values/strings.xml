@@ -5,4 +5,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="job_titles">
+        <item>All categories</item>
+        <item>Design</item>
+        <item>iOS development</item>
+        <item>Android development</item>
+        <item>Web development</item>
+        <item>Business analysis</item>
+        <item>Research</item>
+        <item>Sales</item>
+        <item>Quality assurance</item>
+        <item>Customer support</item>
+        <item>Other</item>
+    </string-array>
 </resources>

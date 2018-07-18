@@ -10,25 +10,11 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		ExampleTemplete<Integer> d = new ExampleTemplete<Integer>();
 
-		 d.setExampleFunction(new FunctionConsumer<Integer>() {
-			 @Override
-			 public Integer Example() {
-			 	int a= 3;
-
-				 return 1;
-			 }
-
-
-		 }).print(new Subscribe<Integer>() {
-			 @Override
-			 public void result(Integer result) {
-
-			 }
-		 })
-		 .doStart();
-
+		new ExampleTemplete<Integer>().setExampleFunction(
+				 ()-> 1)
+				.print(result -> {})
+		.doStart();
 
 
 

@@ -17,19 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".sample.ripple.ActFreeRippleSample">
-        </activity>
-        <activity android:name=".sample.remoteconfig.ActRemoteConfig">
-        </activity>
-        <activity android:name=".sample.stickys.ActStickySample">
-        </activity>
-        <activity android:name=".sample.section.ActSectionSample">
-        </activity>
-        <activity android:name=".sample.purelists.ActMultiListSample">
-        </activity>
-        <activity android:name=".sample.aspectj.ActAspectJSample">
-        </activity>
-        <activity android:name=".rx.ActRx">
+        <activity android:name=".sample.ripple.ActFreeRippleSample"/>
+        <activity android:name=".sample.remoteconfig.ActRemoteConfig"/>
+        <activity android:name=".sample.stickys.ActStickySample"/>
+        <activity android:name=".sample.section.ActSectionSample"/>
+        <activity android:name=".sample.purelists.ActMultiListSample"/>
+        <activity android:name=".sample.aspectj.ActAspectJSample"/>
+        <activity android:name=".rx.ActRx"/>
+        <activity android:name=".sample.social.ActSocial"/>
+        <activity android:name=".sample.realm.ActRealmDB">
         </activity>
     </application>
 

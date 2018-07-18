@@ -1,10 +1,13 @@
 package com.house.godbeom.kotlin
 
+import android.widget.TextView
+
 /**
  * Created by Administrator on 2018-04-10.
  */
 
 class ExampleTempleteKotlin<R> : BaseTask<R> {
+
 
 
     internal var resultSubScribe: Subscribe<R>?=null
@@ -22,6 +25,11 @@ class ExampleTempleteKotlin<R> : BaseTask<R> {
 
     override fun print(result: Subscribe<R>): BaseTask<R> {
         resultSubScribe = result
+        return this
+    }
+
+    override fun print(view: TextView?): BaseTask<*> {
+        view?.text = consumer?.Example().toString()
         return this
     }
 

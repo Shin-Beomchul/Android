@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background">
+
+
+
+    <TextView
+        android:id="@+id/noti_title"
+        android:text="타이틀"
+        android:layout_width="match_parent"
+
+        app:layout_constraintRight_toLeftOf="parent"
+        android:layout_height="40dp"/>
+
+
+    <TextView
+        android:background="#3300ff00"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noti_title"
+        android:id="@+id/noti_subtitle"
+        android:text="부재목"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+</android.support.constraint.ConstraintLayout>

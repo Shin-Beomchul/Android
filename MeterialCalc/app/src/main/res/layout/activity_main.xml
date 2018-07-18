@@ -40,6 +40,11 @@
             android:text="remote Config"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
+        <Button
+            android:id="@+id/btnNotiRealm"
+            android:text="Noti-List"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
 
     </LinearLayout>

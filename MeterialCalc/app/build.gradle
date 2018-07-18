@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'android-aspectj'              /*AspectJ*/
+//apply plugin: 'android-aspectj'              /*AspectJ*/
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -91,12 +92,15 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile project(path: ':retrofit2')
 
+    compile 'com.github.Yalantis:SearchFilter:v1.0.4'
+
 
 }
 
 apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 

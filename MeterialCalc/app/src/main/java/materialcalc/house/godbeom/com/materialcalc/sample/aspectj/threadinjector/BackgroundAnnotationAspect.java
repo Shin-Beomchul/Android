@@ -1,3 +1,4 @@
+/*
 package materialcalc.house.godbeom.com.materialcalc.sample.aspectj.threadinjector;
 
 
@@ -14,6 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+*/
 /**
  *
  * Created by BeomChul.Shin on 2016-07-05.
@@ -24,7 +26,10 @@ import java.util.concurrent.Executors;
  * {@link bBackground},
  * {@link UiThread}
  * </pre>
- */
+ *//*
+
+
+
 @Aspect
 public class BackgroundAnnotationAspect {
 
@@ -68,12 +73,14 @@ public class BackgroundAnnotationAspect {
 	}
 
 
-	/**
+	*/
+/**
 	 * {@link Runnable}을 UI쓰레드에서 실행.
 	 *
 	 * @param run
 	 * @param delayMillis 지연시간
-	 */
+	 *//*
+
 	private void runInUiThread(Runnable run, long delayMillis) {
 		if (delayMillis <= 0) {
 			// 현재 쓰레드가 UI 쓰레드인 경우 걍 run 실행.
@@ -90,7 +97,9 @@ public class BackgroundAnnotationAspect {
 	}
 }
 
-  /*  AspectJ Pointcut 표현식(aspectj __EXPRESSION__), execution, within, bean
+
+  */
+/*  AspectJ Pointcut 표현식(aspectj __EXPRESSION__), execution, within, bean
 
          pointcut :  이란 충고를 받을 메소드를 정의한 것이다.
         execution: 메소드 실행 결합점(join points)과 일치시키는데 사용된다.
