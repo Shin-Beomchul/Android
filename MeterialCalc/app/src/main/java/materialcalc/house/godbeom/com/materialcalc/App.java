@@ -20,7 +20,6 @@ public class App extends MultiDexApplication {
 		FirebaseApp.initializeApp(this);
 		Server serverType = Server.valueOf(BuildConfig.SERVER_TYPE);
 		API.instance().initialize(this, serverType);
-
 		Realm.init(getApplicationContext());
 	}
 }

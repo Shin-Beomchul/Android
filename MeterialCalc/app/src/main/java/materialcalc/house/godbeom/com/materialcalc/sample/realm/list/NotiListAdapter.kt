@@ -16,7 +16,7 @@ import materialcalc.house.godbeom.com.materialcalc.sample.realm.db.RealmDBHelper
 
 class NotiListAdapter(val mContext: Context) : RecyclerView.Adapter<NotiListAdapter.NotiBaseHolder>() {
 
-    private val realmDB = RealmDBHelper();
+    private val realmDB = RealmDBHelper()
     private var notis = ArrayList<NotiADTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): NotiBaseHolder {

@@ -12,7 +12,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:3.2.0'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
-       // classpath 'com.uphyca.gradle:gradle-android-aspectj-plugin:0.9.+'/*aspectj*/
+        classpath 'com.uphyca.gradle:gradle-android-aspectj-plugin:0.9.14'/*aspectj*/
         classpath "io.realm:realm-gradle-plugin:4.2.0"
 
     }

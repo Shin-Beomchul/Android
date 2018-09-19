@@ -79,7 +79,8 @@ public class BackgroundAnnotationAspect {
 	 *
 	 * @param run
 	 * @param delayMillis 지연시간
-	 *//*
+	 */
+/*
 
 	private void runInUiThread(Runnable run, long delayMillis) {
 		if (delayMillis <= 0) {

@@ -7,9 +7,10 @@ import io.realm.RealmResults;
  * Created by god on 2018. 7. 12..
  */
 
-public class RealmDBHelper implements DBHelper {
+public class RealmDBHelper  {
 
 
+	//노티피케이션 데이터 Insert
 	public void addNoti(NotiADTO notiADTO) {
 		Realm.getDefaultInstance()
 				.executeTransaction(new Realm.Transaction() {

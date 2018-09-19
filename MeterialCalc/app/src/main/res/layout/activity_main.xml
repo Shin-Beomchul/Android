@@ -23,7 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
 
+        <!--람다문제로 AspectJ 임시 제거-->
         <Button
+            android:visibility="gone"
             android:id="@+id/btnAspectJ"
             android:text="Aspect J"
             android:layout_width="match_parent"
@@ -42,7 +44,21 @@
             android:layout_height="50dp"/>
         <Button
             android:id="@+id/btnNotiRealm"
-            android:text="Noti-List"
+            android:text="Noti-List(Realm)"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+        <Button
+            android:id="@+id/btnNotification"
+            android:text="Notification In Button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+
+        <Button
+            android:id="@+id/licenseInfo"
+            android:text="licenseInfo"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
 

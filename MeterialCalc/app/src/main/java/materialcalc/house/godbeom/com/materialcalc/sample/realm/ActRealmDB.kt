@@ -21,14 +21,18 @@ import materialcalc.house.godbeom.com.materialcalc.sample.realm.db.NotiLinkTextA
 import materialcalc.house.godbeom.com.materialcalc.sample.realm.db.RealmDBHelper
 import materialcalc.house.godbeom.com.materialcalc.sample.realm.list.FiltersListItemAnimator
 import materialcalc.house.godbeom.com.materialcalc.sample.realm.list.NotiListAdapter
+import materialcalc.house.godbeom.com.materialcalc.sample.utill.Spref
+import java.util.*
 
 class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
-    var cnt =0
+    private var random = Random()
     private  val listAdapter = NotiListAdapter(this)
-    private var notis: RealmResults<NotiADTO>? = null
     private val realmDB = RealmDBHelper()
+    private lateinit var mColors: IntArray
+    private lateinit var filter: Filter<Tag>
 
-    private var mColors: IntArray ?=null
+    //optional
+    private var notis: RealmResults<NotiADTO>? = null
     private var mCategory: Array<String>?=null
 
 
@@ -37,20 +41,22 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_realm_db)
 
-        mColors= resources.getIntArray(R.array.colors)
+        only1Init()
+        notis = realmDB.allNotis
         mCategory = realmDB.categorys
 
-        val filter: Filter<Tag> = findViewById(R.id.filter)
+
+        mColors= resources.getIntArray(R.array.colors)
+        filter = findViewById(R.id.filter)
         filter.adapter = Adapter(getTags())
         filter.noSelectedItemText = "필터"
         filter.listener = this
         filter.build()
 
-        //gets
-        notis = realmDB.allNotis
 
 
-        //init
+
+        //list Init
         val linearMgr = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 //        linearMgr.reverseLayout =true
 //        linearMgr.stackFromEnd =true
@@ -62,14 +68,14 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
 
 
 
-        //TODO DB 업데이트 시 호출
+        //TODO DB 업데이트 시 호출됨
         notis?.addChangeListener({t, changeSet ->
             listAdapter.setNoti((notis!!.toCollection(arrayListOf())))
             listAdapter.notifyDataSetChanged()
             notis?.size?.let { recyclerView.smoothScrollToPosition(it) }
         })
 
-        //TODO live UI change Listener
+
         //delete All
          btndeleteTable.setOnClickListener({
             Realm.getDefaultInstance()
@@ -78,6 +84,8 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
                                 .findAll()
                                 .deleteAllFromRealm()
                     }
+
+             Spref().setBool(applicationContext,"isExistNotiData",false)
         })
 
 
@@ -99,16 +107,14 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
                 texts.add(text1)
                 texts.add(text2)
 
-                cnt ++
-                when(cnt){
-                    1 ->  realmDB.addNoti(NotiADTO("push", "각종 알림을 선택하세요 -push", texts))
-                    2 ->  realmDB.addNoti(NotiADTO("beom", "각종 알림을 선택하세요 -beom", texts))
-                    3 ->  realmDB.addNoti(NotiADTO("chul", "각종 알림을 선택하세요 -chul", texts))
-                    4 ->  realmDB.addNoti(NotiADTO("god", "각종 알림을 선택하세요 -god", texts))
+
+                when(rand(1,4)){
+
+                    1 ->  realmDB.addNoti(NotiADTO("이벤트", "DenPLE 이벤트를 확인하세요!", texts))
+                    2 ->  realmDB.addNoti(NotiADTO("결제", "마스터코스 1회 결제 완료", texts))
+                    3 ->  realmDB.addNoti(NotiADTO("배송", "덴올 - 치과재료 금일 배송 예정", texts))
+                    4 ->  realmDB.addNoti(NotiADTO("댓글알림", "김용진 원장 임상치료 영상에 새로운 댓글이 있습니다", texts))
                 }
-
-
-
 
             }).start()
         })
@@ -139,9 +145,7 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
 
     override fun onFilterSelected(item: Tag) {
 
-       /* notis = realmDB.getNitiByCategory(item.getText())
-        listAdapter.setNoti(notis!!.toCollection(ArrayList()))
-        listAdapter.notifyDataSetChanged()*/
+
     }
 
 
@@ -189,12 +193,12 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
         override fun createView(position: Int, item: Tag): FilterItem {
             val filterItem = FilterItem(this@ActRealmDB)
 
-            filterItem.strokeColor = mColors!![0]
-            filterItem.textColor = mColors!![0]
+            filterItem.strokeColor = mColors[0]
+            filterItem.textColor = mColors[0]
             filterItem.cornerRadius = 14F
             filterItem.checkedTextColor = ContextCompat.getColor(this@ActRealmDB, android.R.color.white)
             filterItem.color = ContextCompat.getColor(this@ActRealmDB, android.R.color.white)
-            filterItem.checkedColor = mColors!![position]
+            filterItem.checkedColor = mColors[position]
             filterItem.text = item.getText()
             filterItem.deselect()
 
@@ -207,7 +211,7 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
         val tags = ArrayList<Tag>()
 
         for (i in mCategory!!.indices) {
-            tags.add(Tag(mCategory!![i], mColors!![i]))
+            tags.add(Tag(mCategory!![i], mColors[i]))
         }
         return tags
     }
@@ -240,5 +244,24 @@ class ActRealmDB : AppCompatActivity(),FilterListener<ActRealmDB.Tag>{
             return result
         }
 
+    }
+
+    fun only1Init(){
+        //최초 없으면
+        if ( ! Spref().getBool(applicationContext, "isExistNotiData")){
+            val texts: RealmList<NotiLinkTextADTO> = RealmList()
+            val initData: NotiLinkTextADTO? = NotiLinkTextADTO()
+            initData?.text = "네이버"
+            initData?.link = "www.naver.com"
+            texts.add(initData)
+            realmDB.addNoti(NotiADTO("이벤트", "DenPLE 이벤트를 확인하세요!", texts))
+            realmDB.addNoti(NotiADTO("결제", "마스터코스 1회 결제 완료", texts))
+            realmDB.addNoti(NotiADTO("배송", "덴올 - 치과재료 금일 배송 예정", texts))
+            realmDB.addNoti(NotiADTO("댓글알림", "김용진 원장 임상치료 영상에 새로운 댓글이 있습니다", texts))
+            Spref().setBool(applicationContext, "isExistNotiData",true)
+        }
+    }
+    fun rand(from: Int, to: Int) : Int {
+        return random.nextInt(to - from) + from
     }
 }
