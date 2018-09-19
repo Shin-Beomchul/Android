@@ -3,6 +3,10 @@ package com.house.godbeom.kotlin;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.house.godbeom.kotlin.shape.MyExtendPager;
+import com.house.godbeom.kotlin.shape.SinglePager;
+import com.house.godbeom.kotlin.testmodule.ExampleTemplete;
+
 public class MainActivity extends AppCompatActivity {
 
 	@Override
@@ -17,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
 		.doStart();
 
 
-
+		new MyExtendPager(getApplicationContext(),"tq");
+		new SinglePager();
 
 
 	}

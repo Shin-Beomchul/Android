@@ -2,9 +2,13 @@ package com.house.godbeom.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 
 
-class MainActivityKotlin : AppCompatActivity() {
+class MainActivityKotlin : AppCompatActivity() ,View.OnClickListener{
+
+    override fun onClick(v: View?) {
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
